@@ -24,7 +24,7 @@
         <td>{{ user.role }}</td>
         <td>{{ user.isEmailVerified ? 'Yes' : 'No' }}</td>
         <td>{{ user.created_at }}</td>
-        <td>{{ user.update_at }}</td>
+        <td>{{ user.updated_at }}</td>
       </tr>
       </tbody>
     </v-table>
