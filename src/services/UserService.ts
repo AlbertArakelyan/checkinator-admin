@@ -1,8 +1,8 @@
 import { request } from '@/utils';
 
 class UserService {
-  static getUsers() {
-    return request('GET', 'user');
+  static getUsers(skip = 0) {
+    return request('GET', `user?skip=${skip}`);
   }
 }
 
