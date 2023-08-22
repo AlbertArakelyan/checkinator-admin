@@ -38,29 +38,4 @@ import { ref } from 'vue';
 import { navLinks } from "@/constants";
 
 const drawer = ref(false);
-
-// export default {
-//   data: () => ({
-//     drawer: false,
-//     items: [
-//       {
-//         title: 'Foo',
-//         value: 'foo',
-//       },
-//       {
-//         title: 'Bar',
-//         value: 'bar',
-//       },
-//       {
-//         title: 'Fizz',
-//         value: 'fizz',
-//       },
-//       {
-//         title: 'Buzz',
-//         value: 'buzz',
-//       },
-//     ],
-//   }),
-//
-// }
 </script>

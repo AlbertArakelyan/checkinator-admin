@@ -6,5 +6,5 @@
 </template>
 
 <script lang="ts" setup>
-import UsersTable from "@/components/views/User/UsersTable.vue";
+import UsersTable from '@/components/views/Users/UsersTable.vue';
 </script>
