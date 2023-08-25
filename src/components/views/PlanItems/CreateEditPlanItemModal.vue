@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-card-title>New Plan Item</v-card-title>
+    <v-card-title>{{ planItemEntry?.name ? 'Edit' : 'Create' }} Plan Item</v-card-title>
     <form @submit.prevent="handleSubmit">
       <v-card-item>
         <v-text-field
@@ -15,7 +15,7 @@
           variant="elevated"
           type="submit"
         >
-          Create
+          {{ planItemEntry?.name ? 'Update' : 'Create' }}
         </v-btn>
         <v-btn
           color="error"
@@ -32,15 +32,17 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
+import { storeToRefs } from 'pinia';
 
-import { usePlanItemsStore } from '@/store/planItem';
+import { usePlanItemStore } from '@/store/planItem';
 
 import { required } from '@/constants';
 
-const planItemsStore = usePlanItemsStore();
-const { createPlanItem } = planItemsStore
+const planItemStore = usePlanItemStore();
+const { planItemEntry } = storeToRefs(planItemStore);
+const { createPlanItem, editPlanItem } = planItemStore;
 
-const name = ref('');
+const name = ref(planItemEntry.value?.name || '');
 
 const emit = defineEmits(['close']);
 
@@ -53,7 +55,12 @@ const handleClose = () => {
 };
 
 const handleSubmit = () => {
-  createPlanItem({ name: name.value });
+  if (planItemEntry.value) {
+    editPlanItem(planItemEntry.value._id, { name: name.value });
+  } else {
+    createPlanItem({ name: name.value });
+  }
   name.value = '';
+  handleClose();
 };
 </script>

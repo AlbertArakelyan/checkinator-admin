@@ -17,8 +17,19 @@
             <td>{{ planItem.updated_at }}</td>
             <td>
               <div class="d-flex align-center justify-end">
-                <v-btn class="mr-2" color="primary" rounded="xs" icon="mdi-pencil"></v-btn>
-                <v-btn color="error" rounded="xs" icon="mdi-delete" @click="handleDelete(planItem._id)"></v-btn>
+                <v-btn
+                  class="mr-2"
+                  color="primary"
+                  rounded="xs"
+                  icon="mdi-pencil"
+                  @click="handleEditPlanItem(planItem)"
+                ></v-btn>
+                <v-btn
+                  color="error"
+                  rounded="xs"
+                  icon="mdi-delete"
+                  @click="handleDelete(planItem._id)"
+                ></v-btn>
               </div>
             </td>
           </tr>
@@ -32,15 +43,21 @@
 import { onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
 
-import { usePlanItemsStore } from '@/store/planItem';
+import { usePlanItemStore } from '@/store/planItem';
 
-const planItemsStore = usePlanItemsStore();
+import { IPlanItem } from '@/types';
 
-const { getPlanItems, deletePlanItem } = planItemsStore;
-const { planItemsList } = storeToRefs(planItemsStore);
+const planItemStore = usePlanItemStore();
+
+const { getPlanItems, deletePlanItem, onEditPlanItem } = planItemStore;
+const { planItemsList } = storeToRefs(planItemStore);
 
 const handleDelete = (id: string) => {
   deletePlanItem(id);
+};
+
+const handleEditPlanItem = (planItem: IPlanItem) => {
+  onEditPlanItem(planItem);
 };
 
 onMounted(() => {

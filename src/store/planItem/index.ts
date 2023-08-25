@@ -7,9 +7,10 @@ import { IPlanItem, IPlanItemData } from '@/types';
 
 import { smthWenWrong } from '@/constants';
 
-export const usePlanItemsStore = defineStore('planItems', {
+export const usePlanItemStore = defineStore('planItems', {
   state: (): IPlanItemStore => ({
     list: [],
+    entry: null,
     loading: false,
     error: null,
   }),
@@ -53,9 +54,31 @@ export const usePlanItemsStore = defineStore('planItems', {
       } catch (error) {
         console.log(error);
       }
+    },
+    onEditPlanItem(item: IPlanItem) {
+      this.entry = item;
+    },
+    onCancelEditPlanItem() {
+      this.entry = null;
+    },
+    async editPlanItem(id: string, data: IPlanItemData) {
+      try {
+        const response = await PlanItemService.editPlanItem<IPlanItem, IPlanItemData>(id,  data);
+
+        if (!response.data.success) {
+          throw new Error(response.data.message || smthWenWrong);
+        }
+
+        this.entry = null;
+        const { _id: planItemId } = response.data.data;
+        this.list = this.list.map(item => item._id === planItemId ? response.data.data : item);
+      } catch (error) {
+        console.log(error);
+      }
     }
   },
   getters: {
     planItemsList: (state: IPlanItemStore) => state.list,
+    planItemEntry: (state: IPlanItemStore) => state.entry,
   }
 });

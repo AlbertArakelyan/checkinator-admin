@@ -12,6 +12,9 @@ class PlanItemService {
   static deletePlanItem<T, D>(id: D) {
     return request<IResponseData<T>>('DELETE', `plan-item/${id}`);
   }
+  static editPlanItem<T, D>(id: string, data: D) {
+    return request<IResponseData<T>>('PUT', `plan-item/${id}`, data);
+  }
 }
 
 export default PlanItemService;

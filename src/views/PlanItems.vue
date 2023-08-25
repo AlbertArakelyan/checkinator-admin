@@ -11,16 +11,23 @@
       v-model="isDialogOpen"
       width="600"
     >
-      <create-plan-item-modal @close="closeDialog"></create-plan-item-modal>
+      <create-edit-plan-item-modal @close="closeDialog"></create-edit-plan-item-modal>
     </v-dialog>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
+import { storeToRefs } from 'pinia';
 
 import PlanItemsTable from '@/components/views/PlanItems/PlanItemsTable.vue';
-import CreatePlanItemModal from '@/components/views/PlanItems/CreatePlanItemModal.vue';
+import CreateEditPlanItemModal from "@/components/views/PlanItems/CreateEditPlanItemModal.vue";
+
+import { usePlanItemStore } from '@/store/planItem';
+
+const planItemStore = usePlanItemStore();
+const { onCancelEditPlanItem } = planItemStore;
+const { planItemEntry } = storeToRefs(planItemStore);
 
 const isDialogOpen = ref(false);
 
@@ -29,6 +36,19 @@ const openDialog = () => {
 };
 
 const closeDialog = () => {
+  onCancelEditPlanItem();
   isDialogOpen.value = false;
 };
+
+watch(planItemEntry, (value) => {
+  if (value) {
+    openDialog();
+  }
+});
+
+watch(isDialogOpen, (value) => {
+  if (!value) {
+    onCancelEditPlanItem();
+  }
+});
 </script>
