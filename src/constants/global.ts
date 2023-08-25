@@ -4,7 +4,11 @@ export const navLinks = [
     href: '/',
   },
   {
+    label: 'Plans',
+    href: '/plans',
+  },
+  {
     label: 'Plan Items',
     href: '/plan-items',
-  }
+  },
 ];
