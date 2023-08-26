@@ -19,7 +19,21 @@
           <td>{{ plan.created_at }}</td>
           <td>{{ plan.updated_at }}</td>
           <td>
-            <div>buttons</div>
+            <div class="d-flex align-center justify-end">
+              <v-btn
+                class="mr-2"
+                color="primary"
+                rounded="xs"
+                icon="mdi-pencil"
+                @click="handleEditPlan(plan)"
+              ></v-btn>
+              <v-btn
+                color="error"
+                rounded="xs"
+                icon="mdi-delete"
+                @click="handleDelete(plan._id)"
+              ></v-btn>
+            </div>
           </td>
         </tr>
       </tbody>
@@ -36,11 +50,19 @@ import { usePlanStore } from '@/store/plan';
 import { IPlan } from '@/types';
 
 const planStore = usePlanStore();
-const { getPlans } = planStore;
+const { getPlans, onEditPlan, deletePlan } = planStore;
 const { plansList } = storeToRefs(planStore);
 
 const getPlanItemsNames = (plan: IPlan) => {
   return plan.planItems.map((planItem) => planItem.name).join(', ');
+};
+
+const handleEditPlan = (plan: IPlan) => {
+  onEditPlan(plan);
+};
+
+const handleDelete = (id: string) => {
+  deletePlan(id);
 };
 
 onMounted(() => {

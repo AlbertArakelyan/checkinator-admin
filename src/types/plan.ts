@@ -14,3 +14,14 @@ export interface IPlanData {
   price: number;
   planItems: string[];
 }
+
+export interface IComboboxPlanItem {
+  value: string;
+  label: string;
+}
+
+export interface IPlanFormData {
+  name: string;
+  price: number;
+  planItems: IComboboxPlanItem[];
+}

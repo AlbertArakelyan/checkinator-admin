@@ -60,6 +60,7 @@ const handleSubmit = () => {
   } else {
     createPlanItem({ name: name.value });
   }
+
   name.value = '';
   handleClose();
 };
