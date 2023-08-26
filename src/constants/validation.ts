@@ -1,1 +1,1 @@
-export const required = (value: string) => `${value} is required`;
+export const required = (value: any) => `${value} is required`;

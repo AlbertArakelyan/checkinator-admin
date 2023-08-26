@@ -15,7 +15,7 @@ export const usePlanItemStore = defineStore('planItems', {
     error: null,
   }),
   actions: {
-    async getPlanItems(page = 1) {
+    async getPlanItems() {
       try {
         const response = await PlanItemService.getPlanItems<IPlanItem[]>();
 
