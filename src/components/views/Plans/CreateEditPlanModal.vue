@@ -21,9 +21,13 @@
           v-model="data.planItems"
           :items="formattedPlanItemsList"
           :rules="planRules.planItems"
-        >
-
-        </v-combobox>
+        ></v-combobox>
+        <v-combobox
+          label="Color"
+          v-model="data.color"
+          :rules="planRules.color"
+          :items="colors"
+        ></v-combobox>
       </v-card-item>
       <v-card-actions>
         <v-btn
@@ -55,6 +59,8 @@ import { usePlanStore } from '@/store/plan';
 
 import { planRules } from '@/utils';
 
+import { colors } from '@/constants';
+
 import { IPlanData, IPlanFormData } from '@/types';
 
 const planItemStore = usePlanItemStore();
@@ -72,6 +78,7 @@ const data = reactive<IPlanFormData>({
   name: planEntry.value?.name || '',
   price: planEntry.value?.price || 0,
   planItems: planEntry.value?.planItems.map((planItem) => ({ value: planItem._id, label: planItem.name })) || [],
+  color: planEntry.value?.color || '',
 });
 
 const formattedPlanItemsList = computed(() => {
@@ -84,7 +91,7 @@ const formattedPlanItemsList = computed(() => {
 const formattedData = computed<IPlanData>(() => {
   return {
     ...data,
-    planItems: data.planItems.map((item: IPlanFormData) => item.value),
+    planItems: data.planItems.map((item) => item.value),
   };
 });
 

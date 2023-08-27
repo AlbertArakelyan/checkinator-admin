@@ -6,6 +6,7 @@
           <th class="text-left">Name</th>
           <th class="text-left">Price</th>
           <th class="text-left">Plan Items</th>
+          <th class="text-left">Color</th>
           <th class="text-left">Created at</th>
           <th class="text-left">Updated at</th>
           <th class="text-right">Controls</th>
@@ -16,6 +17,7 @@
           <td>{{ plan.name }}</td>
           <td>${{ plan.price }}</td>
           <td>{{ getPlanItemsNames(plan) }}</td>
+          <td>{{ plan.color }}</td>
           <td>{{ plan.created_at }}</td>
           <td>{{ plan.updated_at }}</td>
           <td>
