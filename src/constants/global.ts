@@ -12,3 +12,5 @@ export const navLinks = [
     href: '/plan-items',
   },
 ];
+
+export const colors = ['primary', 'secondary', 'subscription-purple', 'subscription-blue'];
